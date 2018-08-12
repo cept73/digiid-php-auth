@@ -18,17 +18,23 @@ Classical password authentication is an insecure process that could be solved wi
 https://github.com/bitid/bitid/blob/master/BIP_draft.md
 
 
+Demo
+=====
+
+You may see demo: https://www.orlib.org/digiid
+Free Registration/Login by QR with ability to be forgotten.
+
+
 Installation
 ============
 * Create a MySQL database, import struct.sql into it.
-* Check if phpecc (at classes/phpecc) also installed. If not - download it from [https://github.com/phpecc/phpecc/tree/366c0d1d00cdf95b0511d34797c116d9be48410e]
 * Configure database information and server url in config.php
+* phpecc at classes/phpecc may be updated from https://github.com/phpecc/phpecc/tree/366c0d1d00cdf95b0511d34797c116d9be48410e
 
 
 Notes
 =====
 * GMP PHP extension is required (most shared hostings don't have it, another reason to implement digibyted support)
-
 * By default, it will only allow 1 user by IP to **try** login at the same time (once a user is logged, another user could start the login process), this example could be modify to allow several (no need to modify DigiID)
 
 
