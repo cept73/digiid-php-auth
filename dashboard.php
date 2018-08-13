@@ -38,7 +38,7 @@ $user_info = $_SESSION['user']['info'];
     <meta name="author" content="">
     <link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico">
 
-    <title>Cover Template for Bootstrap</title>
+    <title>Digi-ID demo site</title>
 
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
@@ -52,7 +52,6 @@ $user_info = $_SESSION['user']['info'];
       <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
-    <script src="js/digiQR.min.js"></script>
   </head>
 
   <body>
@@ -77,10 +76,10 @@ $user_info = $_SESSION['user']['info'];
           <div class="inner cover">
             <h1 class="cover-heading">Hello, <?= $user_info['fio']; ?>!</h1>
 
-            <p class="lead">You have DGB adress:</p>
+            <p class="lead">Your address:</p>
             <p><small><?= $address ?></small></p>
-            <p class="lead"><a href="#"><img id="qr" /></p>
-            <p class="lead">
+
+            <p class="lead" style="margin-top: 40px">
               <a href="logout.php" class="btn btn-lg btn-default">Logout</a>
               <a href="forget.php" class="btn btn-lg">Forget me</a>
             </p>
@@ -102,6 +101,5 @@ $user_info = $_SESSION['user']['info'];
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-    <script>$("#qr").attr("src", DigiQR.request("<?= $address ?>",0,250,3,0.5));</script>
   </body>
 </html>

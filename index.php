@@ -85,7 +85,7 @@ if(!$result)
 						Login or Register:
 					</span>
 					<div class="center">
-						<a href="<?= $digiid_uri ?>"><div><img id="qr" alt="Click on QRcode to activate compatible desktop wallet" border="0" src="<?= $digiid->qrCode($digiid_uri) ?>" /></div></a>
+						<a href="<?= $digiid_uri ?>"><div><img id="qr" alt="Click on QRcode to activate compatible desktop wallet" border="0" /></div></a>
 						<p class="comment">Scan it from your mobile phone. Requires DigiByte application:</p>
 						<p class="applications">
 							<a href="https://itunes.apple.com/us/app/digibyte/id1378061425" target="_blank"><img src="images/appstore.png" height="32px" /></a>
@@ -122,7 +122,9 @@ if(!$result)
 	
 	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+	<script src="js/digiQR.min.js"></script>
 	<script>var step=<?= $step ?>; var nonce='<?= $nonce ?>';</script>
+	<script>$("#qr").attr("src", DigiQR.text("<?= $digiid_uri ?>",300,5));</script>
 	<script src="js/main.js"></script>
 </body>
 </html>
