@@ -80,6 +80,7 @@ if(!$result)
 		<div class="container-login">
 			<div class="wrap-login">
 				<div id="step1" class="login-form hidden">
+					<div class="bigscreen-padding hidden-xs"></div>
 					<span class="login-form-title" style="padding-bottom: 20px">
 						Login or Register:
 					</span>
@@ -120,6 +121,7 @@ if(!$result)
 	</div>
 	
 	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 	<script>var step=<?= $step ?>; var nonce='<?= $nonce ?>';</script>
 	<script src="js/main.js"></script>
 </body>
