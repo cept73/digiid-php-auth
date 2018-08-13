@@ -162,7 +162,7 @@ button:hover, input[type=button]:hover, input[type=submit]:hover {
   min-height: 100vh;
   display: block;
   background-color: #f7f7f7;
-  padding: 153px 55px 55px 55px;
+  padding-top: 140px;
 }
 
 .login-form-title {
@@ -398,3 +398,10 @@ div.timeout {
 div.timeout #qr {
   opacity: 0.2
 }
+
+
+/*------------------------------------------------------------------
+[ Customize ]*/
+
+#step1 .comment { margin-top: 20px }
+#step1 .applications { margin-bottom: 20px }

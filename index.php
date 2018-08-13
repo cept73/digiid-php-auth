@@ -85,9 +85,11 @@ if(!$result)
 					</span>
 					<div class="center">
 						<a href="<?= $digiid_uri ?>"><div><img id="qr" alt="Click on QRcode to activate compatible desktop wallet" border="0" src="<?= $digiid->qrCode($digiid_uri) ?>" /></div></a>
-						<p style="margin-top: 20px">Scan it from your mobile phone. Requires DigiByte application:</p>
-						<a href="https://itunes.apple.com/us/app/digibyte/id1378061425" target="_blank"><img src="images/appstore.png" height="32px" /></a>
-						<a href="https://play.google.com/store/apps/details?id=io.digibyte" target="_blank"><img src="images/android.png" height="32px" /></a>
+						<p class="comment">Scan it from your mobile phone. Requires DigiByte application:</p>
+						<p class="applications">
+							<a href="https://itunes.apple.com/us/app/digibyte/id1378061425" target="_blank"><img src="images/appstore.png" height="32px" /></a>
+							<a href="https://play.google.com/store/apps/details?id=io.digibyte" target="_blank"><img src="images/android.png" height="32px" /></a>
+						</p>
 					</div>
 				</div>
 				<div id="step2" class="login-form hidden">
