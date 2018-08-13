@@ -44,7 +44,7 @@
 
 			// Stop polling
 			clearInterval (timerId);
-		}, 60* 1000); // 60 sec
+		}, 5* 60* 1000); // 5 min
 
 	}
 	// QR scanned, but need to fill form to register

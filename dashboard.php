@@ -41,7 +41,7 @@ $user_info = $_SESSION['user']['info'];
     <title>Cover Template for Bootstrap</title>
 
     <!-- Bootstrap core CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="css/dashboard.css">
 
     <!-- Custom styles for this template -->
@@ -64,21 +64,21 @@ $user_info = $_SESSION['user']['info'];
         <div class="cover-container">
 
           <div class="masthead clearfix">
-            <div class="inner">
-<!--              <h3 class="masthead-brand">Cover</h3>-->
+<!--            <div class="inner">
+              <h3 class="masthead-brand">Cover</h3>
               <nav>
                 <ul class="nav masthead-nav">
                   <li class="active"><a href="#">Home</a></li>
                 </ul>
               </nav>
-            </div>
+            </div>-->
           </div>
 
           <div class="inner cover">
             <h1 class="cover-heading">Hello, <?= $user_info['fio']; ?>!</h1>
 
             <p class="lead">You have DGB adress:</p>
-            <p><strong><?= $address ?></strong></p>
+            <p><small><?= $address ?></small></p>
             <p class="lead"><a href="#"><img id="qr" /></p>
             <p class="lead">
               <a href="logout.php" class="btn btn-lg btn-default">Logout</a>
@@ -102,6 +102,6 @@ $user_info = $_SESSION['user']['info'];
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-    <script>$("#qr").attr("src", DigiQR.request("<?= $address ?>",0,300,3,0.5));</script>
+    <script>$("#qr").attr("src", DigiQR.request("<?= $address ?>",0,250,3,0.5));</script>
   </body>
 </html>
