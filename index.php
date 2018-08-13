@@ -124,7 +124,7 @@ if(!$result)
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 	<script src="js/digiQR.min.js"></script>
 	<script>var step=<?= $step ?>; var nonce='<?= $nonce ?>';</script>
-	<script>$("#qr").attr("src", DigiQR.text("<?= $digiid_uri ?>",300,5));</script>
+	<script>$("#qr").attr("src", DigiQR.id("<?= $digiid_uri ?>",300,6,0.5));</script>
 	<script src="js/main.js"></script>
 </body>
 </html>
