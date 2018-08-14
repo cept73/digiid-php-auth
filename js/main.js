@@ -9,8 +9,11 @@
 
 		// Poll server, is user scan QR throw his application?
 		var timerId = setInterval(function() {
+			// Detect URL base dir
+	    		var path = window.location.href; path = path.substring (0, path.lastIndexOf('/'));
+
 			var r = new XMLHttpRequest();
-			r.open("POST", "/digiid/ajax.php", true);
+			r.open("POST", path + "/ajax.php", true);
 			r.onreadystatechange = function () {
 				if (r.readyState != 4 || r.status != 200) return;
 				if (r.responseText !='') {
@@ -20,7 +23,7 @@
 					if (result.address == false) return;
 
 					// If already registered, show dashboard
-					if (result.info.fio) document.location = "dashboard.php";
+					if (result.info.fio) document.location = path + "/dashboard.php";
 					// If not registered yet, need to fill the form
 					else {
 						// Stop polling
@@ -44,7 +47,7 @@
 
 			// Stop polling
 			clearInterval (timerId);
-		}, 5* 60* 1000); // 5 min
+		}, 1* 60* 1000); // 5 min
 
 	}
 	// QR scanned, but need to fill form to register
