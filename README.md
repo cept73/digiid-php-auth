@@ -2,6 +2,7 @@ DigiID demo site
 ===========================
 
 Demo site implementation of [DigiID project/draft](https://github.com/bitid/bitid).
+If you like this work, you may send some DGB to DLTdEPQLCUQsiJzbEhxVwxScYUAtiAJMTW
 
 Based on the [digibyte/digiid-php](https://github.com/digibyte/digiid-php), which based on the work of [scintill/php-bitcoin-signature-routines](https://github.com/scintill/php-bitcoin-signature-routines) and using [PHPECC classes](https://github.com/mdanter/phpecc)
 
