@@ -23,3 +23,5 @@ define('DB_HOST', '');
 define('DB_USER', '');
 define('DB_PASS', '');
 define('DB_NAME', '');
+
+define('GOOGLE_ANALYTICS_TAG', ''); // for example, UA-123456789-1
