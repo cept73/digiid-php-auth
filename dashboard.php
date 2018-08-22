@@ -14,11 +14,11 @@ limitations under the License.
 */
 
 session_start();
+require_once dirname(__FILE__) . "/config.php";
 
 // No user logged in
 if (empty($_SESSION['user']['address']) || empty($_SESSION['user']['info']))
 {
-	require_once dirname(__FILE__) . "/config.php";
 	header ('location:' . SERVER_URL);
 	exit;
 }
