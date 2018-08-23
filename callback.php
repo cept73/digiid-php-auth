@@ -54,4 +54,8 @@ if($signValid && $dao->checkNonce($nonce) && ($digiid->buildURI(SERVER_URL . 'ca
         header("location: index.php");
     }
 
+
+    $data = array ('address'=>$input['address'], 'nonce'=>$nonce);
+    header('Content-Type: application/json');
+    echo json_encode($data);
 }
