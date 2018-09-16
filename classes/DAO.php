@@ -22,7 +22,8 @@ class DAO {
 
     private $_mysqli;
     public function __construct($host = DB_HOST, $user = DB_USER, $pass = DB_PASS, $name = DB_NAME) {
-        $this->_mysqli = new mysqli($host, $user, $pass, $name);
+        @$this->_mysqli = new mysqli($host, $user, $pass, $name);
+	if ($this->_mysqli->connect_errno) die ($this->_mysqli->connect_error);
     }
 
     /**

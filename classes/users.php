@@ -21,7 +21,8 @@ class token_user {
     private $_mysqli;
     private $addr;
     public function __construct($addr = null, $host = DB_HOST, $user = DB_USER, $pass = DB_PASS, $name = DB_NAME) {
-        $this->_mysqli = new mysqli($host, $user, $pass, $name);
+        @$this->_mysqli = new mysqli($host, $user, $pass, $name);
+	if ($this->_mysqli->connect_errno) die ($this->_mysqli->connect_error);
 	$this->addr = $addr;
     }
 
