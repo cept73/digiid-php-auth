@@ -15,14 +15,16 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
+// COPY TO config.php AND CHANGE PARAMS
+
 // define your absolute url
-define('DIGIID_SERVER_URL', 'http://digiid-php-auth.local/');
+define('DIGIID_SERVER_URL', 'https://www.site.com/enter/'); // https is must!
 
 // define database credentials
 define('DIGIID_DB_HOST', 'localhost');
-define('DIGIID_DB_NAME', 'digiid');
+define('DIGIID_DB_NAME', 'table');
 define('DIGIID_DB_USER', 'root');
 define('DIGIID_DB_PASS', '');
 define('DIGIID_TBL_PREFIX', 'digiid_');
 
-define('DIGIID_GOOGLE_ANALYTICS_TAG', '');
+define('DIGIID_GOOGLE_ANALYTICS_TAG', 'UA-123456789-1');

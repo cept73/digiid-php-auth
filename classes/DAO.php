@@ -21,10 +21,36 @@ require_once dirname(__FILE__) . "/../config.php";
 class DAO {
 
     private $_mysqli;
-    public function __construct($host = DB_HOST, $user = DB_USER, $pass = DB_PASS, $name = DB_NAME) {
+    public function __construct($host = DIGIID_DB_HOST, $user = DIGIID_DB_USER, $pass = DIGIID_DB_PASS, $name = DIGIID_DB_NAME) {
         @$this->_mysqli = new mysqli($host, $user, $pass, $name);
-	if ($this->_mysqli->connect_errno) die ($this->_mysqli->connect_error);
+        if ($this->_mysqli->connect_errno) die ($this->_mysqli->connect_error);
+
+        $this->checkInstalled();
     }
+
+    /**
+      * Create tables if not exists
+      * @return bool
+      */
+    public function checkInstalled() {
+        $required_tables = array (
+            DIGIID_TBL_PREFIX . 'nonces' => '
+                CREATE TABLE `' . DIGIID_TBL_PREFIX . 'nonces` (
+                    `s_ip` varchar(46) COLLATE utf8_bin NOT NULL,
+                    `dt_datetime` datetime NOT NULL,
+                    `s_nonce` varchar(32) COLLATE utf8_bin NOT NULL,
+                    `s_address` varchar(34) COLLATE utf8_bin DEFAULT NULL,
+                    UNIQUE KEY `s_nonce` (`s_nonce`),
+                    KEY `dt_datetime` (`dt_datetime`)
+                    ) ENGINE=InnoDB DEFAULT CHARSET=utf8'
+        );
+
+        foreach ($required_tables as $name => $sql) {
+            $table_exists = ($test = $this->_mysqli->query("SHOW TABLES LIKE '$name'")) && $test->num_rows == 1;
+            if (!$table_exists) $this->_mysqli->query($sql);
+        }
+    }
+
 
     /**
      * Insert nonce + IP in the database to avoid an attacker go and try several nonces
@@ -37,7 +63,7 @@ class DAO {
      */
     public function insert($nonce, $ip) {
         $this->deleteIP($ip);
-        return $this->_mysqli->query(sprintf("INSERT INTO digiid_nonces (`s_ip`, `dt_datetime`, `s_nonce`) VALUES ('%s', '%s', '%s')", $this->_mysqli->real_escape_string($ip), date('Y-m-d H:i:s'), $this->_mysqli->real_escape_string($nonce)));
+        return $this->_mysqli->query(sprintf("INSERT INTO " . DIGIID_TBL_PREFIX . "nonces (`s_ip`, `dt_datetime`, `s_nonce`) VALUES ('%s', '%s', '%s')", $this->_mysqli->real_escape_string($ip), date('Y-m-d H:i:s'), $this->_mysqli->real_escape_string($nonce)));
     }
 
     /**
@@ -48,7 +74,7 @@ class DAO {
      * @return bool|mysqli_result
      */
     public function update($nonce, $address) {
-        return $this->_mysqli->query(sprintf("UPDATE digiid_nonces SET s_address = '%s' WHERE s_nonce = '%s' ", $this->_mysqli->real_escape_string($address), $this->_mysqli->real_escape_string($nonce)));
+        return $this->_mysqli->query(sprintf("UPDATE " . DIGIID_TBL_PREFIX . "nonces SET s_address = '%s' WHERE s_nonce = '%s' ", $this->_mysqli->real_escape_string($address), $this->_mysqli->real_escape_string($nonce)));
     }
 
     /**
@@ -58,7 +84,7 @@ class DAO {
      * @return bool|mysqli_result
      */
     public function delete($nonce) {
-        return $this->_mysqli->query(sprintf("DELETE FROM digiid_nonces WHERE s_nonce = '%s' ", $this->_mysqli->real_escape_string($nonce)));
+        return $this->_mysqli->query(sprintf("DELETE FROM " . DIGIID_TBL_PREFIX . "nonces WHERE s_nonce = '%s' ", $this->_mysqli->real_escape_string($nonce)));
     }
 
     /**
@@ -68,7 +94,7 @@ class DAO {
      * @return bool|mysqli_result
      */
     public function deleteIP($ip) {
-        return $this->_mysqli->query(sprintf("DELETE FROM digiid_nonces WHERE s_ip = '%s' ", $this->_mysqli->real_escape_string($ip)));
+        return $this->_mysqli->query(sprintf("DELETE FROM " . DIGIID_TBL_PREFIX . "nonces WHERE s_ip = '%s' ", $this->_mysqli->real_escape_string($ip)));
     }
 
     /**
@@ -79,7 +105,7 @@ class DAO {
      * @return bool
      */
     public function address($nonce, $ip) {
-        $result = $this->_mysqli->query(sprintf("SELECT * FROM digiid_nonces WHERE s_nonce = '%s' AND s_ip = '%s' LIMIT 1 ", $this->_mysqli->real_escape_string($nonce), $this->_mysqli->real_escape_string($ip)));
+        $result = $this->_mysqli->query(sprintf("SELECT * FROM " . DIGIID_TBL_PREFIX . "nonces WHERE s_nonce = '%s' AND s_ip = '%s' LIMIT 1 ", $this->_mysqli->real_escape_string($nonce), $this->_mysqli->real_escape_string($ip)));
         if($result) {
             $row = $result->fetch_assoc();
             if(isset($row['s_address']) && $row['s_address']!='') {
@@ -96,7 +122,7 @@ class DAO {
 	 * @return bool
 	 */
 	public function checkNonce($nonce) {
-		if($this->_mysqli->query(sprintf("SELECT * FROM digiid_nonces WHERE s_nonce = '%s'", $this->_mysqli->real_escape_string($nonce))))
+		if($this->_mysqli->query(sprintf("SELECT * FROM " . DIGIID_TBL_PREFIX . "nonces WHERE s_nonce = '%s'", $this->_mysqli->real_escape_string($nonce))))
 			return true;
 		return false;
 	}
@@ -108,7 +134,7 @@ class DAO {
      * @return bool
      */
     public function ip($nonce) {
-        $result = $this->_mysqli->query(sprintf("SELECT * FROM digiid_nonces WHERE s_nonce = '%s' LIMIT 1 ", $this->_mysqli->real_escape_string($nonce)));
+        $result = $this->_mysqli->query(sprintf("SELECT * FROM " . DIGIID_TBL_PREFIX . "nonces WHERE s_nonce = '%s' LIMIT 1 ", $this->_mysqli->real_escape_string($nonce)));
         if($result) {
             $row = $result->fetch_assoc();
             if(isset($row['s_ip'])) {

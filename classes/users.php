@@ -24,6 +24,27 @@ class token_user {
         @$this->_mysqli = new mysqli($host, $user, $pass, $name);
 	if ($this->_mysqli->connect_errno) die ($this->_mysqli->connect_error);
 	$this->addr = $addr;
+
+        $this->checkInstalled();
+    }
+
+    /**
+      * Create tables if not exists
+      * @return bool
+      */
+    public function checkInstalled() {
+        $required_tables = array (
+            DIGIID_TBL_PREFIX . 'users' => '
+                CREATE TABLE `' . DIGIID_TBL_PREFIX . 'users` (
+                    `addr` varchar(46) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+                    `fio` varchar(60) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL
+                    ) ENGINE=InnoDB DEFAULT CHARSET=utf8'
+        );
+
+        foreach ($required_tables as $name => $sql) {
+            $table_exists = ($test = $this->_mysqli->query("SHOW TABLES LIKE '$name'")) && $test->num_rows == 1;
+            if (!$table_exists) $this->_mysqli->query($sql);
+        }
     }
 
     /**
@@ -34,7 +55,7 @@ class token_user {
      * @return bool|mysqli_result
      */
     public function insert($info) {
-        return $this->_mysqli->query(sprintf("INSERT INTO digiid_users (`addr`, `fio`) VALUES ('%s', '%s')", $this->_mysqli->real_escape_string($this->addr), $this->_mysqli->real_escape_string($info['fio'])));
+        return $this->_mysqli->query(sprintf("INSERT INTO " . DIGIID_TBL_PREFIX . "users (`addr`, `fio`) VALUES ('%s', '%s')", $this->_mysqli->real_escape_string($this->addr), $this->_mysqli->real_escape_string($info['fio'])));
     }
 
     /**
@@ -45,7 +66,7 @@ class token_user {
      * @return bool|mysqli_result
      */
     public function update($info) {
-        return $this->_mysqli->query(sprintf("UPDATE digiid_users SET fio = '%s' WHERE addr = '%s' ", $this->_mysqli->real_escape_string($info['fio']), $this->_mysqli->real_escape_string($this->addr)));
+        return $this->_mysqli->query(sprintf("UPDATE " . DIGIID_TBL_PREFIX . "users SET fio = '%s' WHERE addr = '%s' ", $this->_mysqli->real_escape_string($info['fio']), $this->_mysqli->real_escape_string($this->addr)));
     }
 
     /**
@@ -55,7 +76,7 @@ class token_user {
      * @return bool|mysqli_result
      */
     public function delete() {
-        return $this->_mysqli->query(sprintf("DELETE FROM digiid_users WHERE addr = '%s' ", $this->_mysqli->real_escape_string($this->addr)));
+        return $this->_mysqli->query(sprintf("DELETE FROM " . DIGIID_TBL_PREFIX . "users WHERE addr = '%s' ", $this->_mysqli->real_escape_string($this->addr)));
     }
 
     /**
@@ -64,7 +85,7 @@ class token_user {
      * @return array
      */
     public function get_info() {
-        $result = $this->_mysqli->query($sql = sprintf("SELECT fio FROM digiid_users WHERE addr = '%s'", $this->_mysqli->real_escape_string($this->addr)));
+        $result = $this->_mysqli->query($sql = sprintf("SELECT fio FROM " . DIGIID_TBL_PREFIX . "users WHERE addr = '%s'", $this->_mysqli->real_escape_string($this->addr)));
         if($result) {
             $row = $result->fetch_assoc();
             if(count($row)) return $row;
