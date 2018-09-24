@@ -30,10 +30,9 @@ if($post_data!==null) {
 }
 
 // ALL THOSE VARIABLES HAVE TO BE SANITIZED !
-
 $signValid = $digiid->isMessageSignatureValidSafe(@$input['address'], @$input['signature'], @$input['uri']);
 $nonce = $digiid->extractNonce($input['uri']);
-if($signValid && $dao->checkNonce($nonce) && ($digiid->buildURI(SERVER_URL . 'callback.php', $nonce) === $input['uri'])) {
+if($signValid && $dao->checkNonce($nonce) && ($digiid->buildURI(DIGIID_SERVER_URL . 'callback.php', $nonce) === $input['uri'])) {
     $dao->update($nonce, $input['address']);
 
     session_start();

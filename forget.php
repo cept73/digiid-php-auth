@@ -27,4 +27,4 @@ if (isset($_SESSION['user']))
 	unset ($_SESSION['user']);
 }
 
-header ('location: ' . SERVER_URL);
+header ('location: ' . DIGIID_SERVER_URL);

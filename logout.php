@@ -18,4 +18,4 @@ session_start();
 unset ($_SESSION['user']);
 
 require_once dirname(__FILE__) . "/config.php";
-header ('location: ' . SERVER_URL);
+header ('location: ' . DIGIID_SERVER_URL);

@@ -29,4 +29,4 @@ if (isset($_SESSION['user']['address']))
 	$_SESSION['user']['info'] = $user->get_info ();
 }
 
-header ('location: ' . SERVER_URL);
+header ('location: ' . DIGIID_SERVER_URL);
