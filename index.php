@@ -100,6 +100,7 @@ if(!$result)
 					</div>
 				</div>
 				<div id="step2" class="login-form hidden">
+					<div class="bigscreen-padding hidden-xs"></div>
 					<form id="regform" action="<?= DIGIID_SERVER_URL ?>register.php" method="post">
 					<span class="login-form-title" style="padding-bottom: 42px;">
 						Fill the form:
@@ -110,7 +111,7 @@ if(!$result)
 						<span class="label-input100">Your name</span>
 					</div>
 					<div class="container-login-form-btn">
-						<input type="submit" class="login-form-btn" value="Register" />
+						<input type="submit" class="login-form-btn main" value="Register" />
 					</div>
 					</form>
 					<form action="<?= DIGIID_SERVER_URL ?>logout.php" method="post">
