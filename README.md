@@ -2,7 +2,7 @@ DigiID demo site
 ===========================
 
 Demo site implementation of [DigiID project/draft](https://github.com/bitid/bitid) for authentication.
-If you like this work, you may send some DGB to me: DLTdEPQLCUQsiJzbEhxVwxScYUAtiAJMTW
+If you like this work, you may send some DGB to me: DPZ9BncvaCRx7vMXN6dAQNnXzTP6JVahqj
 
 Based on the [digibyte/digiid-php](https://github.com/digibyte/digiid-php), which based on the work of [scintill/php-bitcoin-signature-routines](https://github.com/scintill/php-bitcoin-signature-routines) and using [PHPECC classes](https://github.com/mdanter/phpecc)
 
@@ -22,7 +22,7 @@ https://github.com/bitid/bitid/blob/master/BIP_draft.md
 Demo
 =====
 
-You may see demo: https://www.orlib.org/digiid
+You may see demo: https://DigiByteForums.io
 Free Registration/Login by QR with ability to be forgotten.
 
 
