@@ -411,3 +411,16 @@ div.timeout #qr {
 /*------------------------------------------------------------------
 [ Customize ]*/
 
+#source-link {
+    z-index: 20;
+    width: 36px;
+    position: absolute;
+    display: inline-block;
+    bottom: 30px;
+    left: 24px;
+    background: none;
+    text-align: center;
+}
+    #source-link img {
+        width: 32px;
+    }
