@@ -11,7 +11,7 @@ body, html {
   font-family: Verdana;
 }
 
-body {
+body, .login-more {
   background-image: url(../images/bg-01.jpg);
   background-repeat: no-repeat;
   background-size: cover;
@@ -129,6 +129,7 @@ button:hover, input[type=button]:hover, input[type=submit]:hover {
 /*==================================================================
 [ login more ]*/
 .login-more {
+
   width: calc(100% - 560px);
   position: relative;
   z-index: 1;
