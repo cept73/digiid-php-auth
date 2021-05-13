@@ -15,18 +15,17 @@ limitations under the License.
 
 session_start ();
 
-require_once dirname(__FILE__) . "/config.php";
-require_once dirname(__FILE__) . "/classes/users.php";
+require_once __DIR__ . '/config.php';
+require_once __DIR__ . '/classes/users.php';
 
 // Address must be defined for register
-if (isset($_SESSION['user']['address']))
-{
+if (isset($_SESSION['user']['address'])) {
 	// Save it
 	$user = new token_user($_SESSION['user']['address']);
-	$user->insert ($_POST);
+	$user->insert($_POST);
 	//$dao = new DAO();
 	//$dao->remove($nonce);
-	$_SESSION['user']['info'] = $user->get_info ();
+	$_SESSION['user']['info'] = $user->get_info();
 }
 
-header ('location: ' . DIGIID_SERVER_URL);
+header('location: ' . DIGIID_SERVER_URL);

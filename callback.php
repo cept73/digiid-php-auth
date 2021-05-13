@@ -15,9 +15,9 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-require_once dirname(__FILE__) . "/classes/DigiID.php";
-require_once dirname(__FILE__) . "/classes/DAO.php";
-require_once dirname(__FILE__) . "/classes/users.php";
+require_once __DIR__ . '/classes/DigiID.php';
+require_once __DIR__ . '/classes/DAO.php';
+require_once __DIR__ . '/classes/users.php';
 
 $digiid = new DigiID();
 $dao = new DAO();
@@ -25,36 +25,32 @@ $dao = new DAO();
 $input = $_POST;
 $post_data = json_decode(file_get_contents('php://input'), true);
 // SIGNED VIA PHONE WALLET (data is send as payload)
-if($post_data!==null) {
+if($post_data !== null) {
     $input = $post_data;
 }
 
 // ALL THOSE VARIABLES HAVE TO BE SANITIZED !
 $signValid = $digiid->isMessageSignatureValidSafe(@$input['address'], @$input['signature'], @$input['uri']);
 $nonce = $digiid->extractNonce($input['uri']);
-if($signValid && $dao->checkNonce($nonce) && ($digiid->buildURI(DIGIID_SERVER_URL . 'callback.php', $nonce) === $input['uri'])) {
+if ($signValid && $dao->checkNonce($nonce) && ($digiid->buildURI(DIGIID_SERVER_URL . 'callback.php', $nonce) === $input['uri'])) {
     $dao->update($nonce, $input['address']);
 
     session_start();
     $user = new token_user ($input['address']);
-    $_SESSION['user'] = array (
-	'address' => $input['address'],
-	'info' => $user->get_info()
-	);
+    $_SESSION['user'] = [
+        'address' => $input['address'],
+        'info' => $user->get_info()
+	];
 
     // SIGNED VIA PHONE WALLET (data is send as payload)
-    if($post_data!==null) {
-        //DO NOTHING
-
-    } else {
+    if ($post_data === null) {
         // SIGNED MANUALLY (data is stored in $_POST+$_REQUEST vs payload)
         // SHOW SOMETHING PRETTY TO THE USER
 
-        header("location: index.php");
+        header('location: index.php');
     }
 
-
-    $data = array ('address'=>$input['address'], 'nonce'=>$nonce);
+    $data = ['address' => $input['address'], 'nonce' => $nonce];
     header('Content-Type: application/json');
     echo json_encode($data);
 }

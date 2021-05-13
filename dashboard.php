@@ -14,12 +14,11 @@ limitations under the License.
 */
 
 session_start();
-require_once dirname(__FILE__) . "/config.php";
+require_once __DIR__ . '/config.php';
 
 // No user logged in
-if (empty($_SESSION['user']['address']) || empty($_SESSION['user']['info']))
-{
-	header ('location:' . SERVER_URL);
+if (empty($_SESSION['user']['address']) || empty($_SESSION['user']['info'])) {
+	header('location:' . SERVER_URL);
 	exit;
 }
 
@@ -53,10 +52,11 @@ $user_info = $_SESSION['user']['info'];
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 
-<?php if (DIGIID_GOOGLE_ANALYTICS_TAG != '') : ?><!-- Global site tag (gtag.js) - Google Analytics -->
+<?php if (DIGIID_GOOGLE_ANALYTICS_TAG) : ?><!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=<?= DIGIID_GOOGLE_ANALYTICS_TAG ?>"></script>
     <script>window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date()); gtag('config', '<?= DIGIID_GOOGLE_ANALYTICS_TAG ?>');</script><?php endif ?>
+    gtag('js', new Date()); gtag('config', '<?= DIGIID_GOOGLE_ANALYTICS_TAG ?>');</script>
+<?php endif ?>
   </head>
 
   <body>

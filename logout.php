@@ -15,7 +15,7 @@ limitations under the License.
 
 session_start();
 
-unset ($_SESSION['user']);
+unset($_SESSION['user']);
 
-require_once dirname(__FILE__) . "/config.php";
+require_once __DIR__ . '/config.php';
 header ('location: ' . DIGIID_SERVER_URL);

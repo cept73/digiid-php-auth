@@ -18,13 +18,13 @@ limitations under the License.
 // COPY TO config.php AND CHANGE PARAMS
 
 // define your absolute url
-define('DIGIID_SERVER_URL', 'https://www.site.com/enter/'); // https is must!
+const DIGIID_SERVER_URL = 'https://www.site.com/enter/'; // https is must!
 
 // define database credentials
-define('DIGIID_DB_HOST', 'localhost');
-define('DIGIID_DB_NAME', 'table');
-define('DIGIID_DB_USER', 'root');
-define('DIGIID_DB_PASS', '');
-define('DIGIID_TBL_PREFIX', 'digiid_');
+const DIGIID_DB_HOST = 'localhost';
+const DIGIID_DB_NAME = 'table';
+const DIGIID_DB_USER = 'root';
+const DIGIID_DB_PASS = '';
+const DIGIID_TBL_PREFIX = 'digiid_';
 
-define('DIGIID_GOOGLE_ANALYTICS_TAG', 'UA-123456789-1');
+const DIGIID_GOOGLE_ANALYTICS_TAG = 'UA-123456789-1';

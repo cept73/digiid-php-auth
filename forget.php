@@ -15,16 +15,15 @@ limitations under the License.
 
 session_start ();
 
-require_once dirname(__FILE__) . "/config.php";
-require_once dirname(__FILE__) . "/classes/users.php";
+require_once __DIR__ . '/config.php';
+require_once __DIR__ . '/classes/users.php';
 
 // If required param is not passed
-if (isset($_SESSION['user']))
-{
+if (isset($_SESSION['user'])) {
 	$address = $_SESSION['user']['address'];
 	$user = new token_user($address);
-	$user->delete ();
-	unset ($_SESSION['user']);
+	$user->delete();
+	unset($_SESSION['user']);
 }
 
 header ('location: ' . DIGIID_SERVER_URL);

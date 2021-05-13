@@ -18,17 +18,21 @@ limitations under the License.
 session_start ();
 
 // Require users operations
-require_once dirname(__FILE__) . "/classes/users.php";
+require_once __DIR__ . '/classes/users.php';
+// DigiID is required for login (do not modify)
+// DAO could be replace by your CMS/FRAMEWORK database classes
+require_once __DIR__ . '/classes/DigiID.php';
+require_once __DIR__ . '/classes/DAO.php';
 
 // Current stored value
 $user_addr = $user_info = false;
 // He is already specify QR
-if (isset($_SESSION['user']['address'])) 
-{
+if (isset($_SESSION['user']['address'])) {
 	// Load all we already know about user
 	$user_addr = $_SESSION['user']['address'];
-	if (!empty($_SESSION['user']['info']))
-		$user_info = $_SESSION['user']['info'];
+	if (!empty($_SESSION['user']['info'])) {
+        $user_info = $_SESSION['user']['info'];
+    }
 
 	// He is logged fully
 	if ($user_addr && $user_info) {
@@ -41,10 +45,6 @@ if (isset($_SESSION['user']['address']))
 // 1 - Scan QR first. 2 - Wait details for registration
 $step = (!isset($_SESSION['user'])) ? 1 : 2;
 
-// DigiID is required for login (do not modify)
-// DAO could be replace by your CMS/FRAMEWORK database classes
-require_once dirname(__FILE__) . "/classes/DigiID.php";
-require_once dirname(__FILE__) . "/classes/DAO.php";
 $digiid = new DigiID();
 // generate a nonce
 $nonce = $digiid->generateNonce();
@@ -56,13 +56,15 @@ $digiid_uri = $digiid->buildURI(DIGIID_SERVER_URL . 'callback.php', $nonce);
 // (this is deleted after an user successfully log in the system, so only will collide if two or more users try to log in at the same time)
 $dao = new DAO();
 $result = $dao->insert($nonce, @$_SERVER['REMOTE_ADDR']);
-if ($dao->error) die ('');
+if ($dao->error) {
+    exit;
+}
 
-if(!$result)
-{
-	echo "<pre>";
-	echo "Database failer\n";
+if (!$result) {
+	echo '<pre>';
+	echo "Database fail\n";
 	var_dump($dao);
+    echo '</pre>';
 	die();
 }
 ?>
@@ -75,10 +77,11 @@ if(!$result)
 	<link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 	<link rel="stylesheet" type="text/css" href="css/main.css?060319">
-<?php if (DIGIID_GOOGLE_ANALYTICS_TAG != '') : ?><!-- Global site tag (gtag.js) - Google Analytics -->
+<?php if (DIGIID_GOOGLE_ANALYTICS_TAG) : ?><!-- Global site tag (gtag.js) - Google Analytics -->
 	<script async src="https://www.googletagmanager.com/gtag/js?id=<?= DIGIID_GOOGLE_ANALYTICS_TAG ?>"></script>
 	<script>window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);}
-	gtag('js', new Date()); gtag('config', '<?= DIGIID_GOOGLE_ANALYTICS_TAG ?>');</script><?php endif ?>
+	gtag('js', new Date()); gtag('config', '<?= DIGIID_GOOGLE_ANALYTICS_TAG ?>');</script>
+<?php endif ?>
 </head>
 <body>
 	
@@ -91,7 +94,8 @@ if(!$result)
 						Login or Register:
 					</span>
 					<div class="center">
-						<div><img id="qr" class="DigiQR" alt="Click on QRcode to activate compatible desktop wallet" uri="<?= $digiid_uri ?>" size="300" logo="2" r="1" border="0" /></div>
+						<div><img id="qr" class="DigiQR" alt="Click on QRcode to activate compatible desktop wallet"
+                                  uri="<?= $digiid_uri ?>" size="300" logo="2" r="1" border="0" /></div>
 						<p class="comment">Scan it from your mobile phone. Requires DigiByte application:</p>
 						<p class="applications">
 							<a href="https://itunes.apple.com/us/app/digibyte/id1378061425" target="_blank"><img src="images/appstore.png" height="32px" /></a>
