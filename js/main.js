@@ -43,7 +43,7 @@
 		var timerTimeout = setTimeout(function() {
 			// Change a view
 			$("#qr").parent()./* div-> */addClass('timeout').after('<p style="color:red">Timeout. Refresh for use.</p>')
-				.parent()./* a-> */attr({'href': document.location, 'title': 'Press to refresh'});
+				.parent()./* a-> */attr({'href': '/', 'title': 'Press to refresh'});
 
 			// Stop polling
 			clearInterval (timerId);

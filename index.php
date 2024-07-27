@@ -95,7 +95,7 @@ if (!$result) {
 					</span>
 					<div class="center">
 						<div><img id="qr" class="DigiQR" alt="Click on QRcode to activate compatible desktop wallet"
-                                  uri="<?= $digiid_uri ?>" size="300" logo="2" r="1" border="0" /></div>
+                                  uri="<?= $digiid_uri ?>" size="300" logo="2" r="1" /></div>
 						<p class="comment">Scan it from your mobile phone. Requires DigiByte application:</p>
 						<p class="applications">
 							<a href="https://itunes.apple.com/us/app/coinomi-wallet/id1333588809" target="_blank"><img src="images/appstore.png" alt="iOS" height="32px" /></a>
