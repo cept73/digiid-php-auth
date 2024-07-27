@@ -21,6 +21,9 @@ require_once dirname(__FILE__) . "/../config.php";
 class DAO {
 
     private $_mysqli;
+
+    public $error;
+
     public function __construct($host = DIGIID_DB_HOST, $user = DIGIID_DB_USER, $pass = DIGIID_DB_PASS, $name = DIGIID_DB_NAME) {
         @$this->_mysqli = new mysqli($host, $user, $pass, $name);
         if ($this->_mysqli->connect_errno) die ($this->_mysqli->connect_error);
