@@ -16,7 +16,7 @@ limitations under the License.
 */
 
 if (extension_loaded('gmp')) {
-    define('USE_EXT', 'GMP');
+    define('USE_EXT', 'GMP', true);
 } else {
     die('GMP extension required.'); // It may be available in a package called "php5-gmp" or similar for your system
 }
@@ -360,7 +360,7 @@ class DigiID {
 
 
 // Setup-stuff cribbed from index.php in the ECC repo
-function __autoload($f) {
+spl_autoload_register(function ($f) {
     $base = dirname(__FILE__)."/phpecc/";
     $interfaceFile = $base . "classes/interface/" . $f . "Interface.php";
 
@@ -377,4 +377,4 @@ function __autoload($f) {
     if (file_exists($utilFile)) {
         require_once $utilFile;
     }
-}
+});
